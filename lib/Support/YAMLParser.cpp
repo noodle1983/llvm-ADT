@@ -1621,7 +1621,7 @@ bool Scanner::findBlockScalarIndent(unsigned &BlockIndent,
                                     unsigned BlockExitIndent,
                                     unsigned &LineBreaks, bool &IsDone) {
   unsigned MaxAllSpaceLineCharacters = 0;
-  StringRef::iterator LongestAllSpaceLine;
+  StringRef::iterator LongestAllSpaceLine = nullptr;
 
   while (true) {
     advanceWhile(&Scanner::skip_s_space);

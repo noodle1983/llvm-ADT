@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{01582431-3cce-4d4c-a3cd-e52b11fbdbf6}</ProjectGuid>
+    <RootNamespace>llvmadvanceddatatype</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>..</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>../googletest/;..</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4267;4146;4624;4244;4805</DisableSpecificWarnings>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>../googletest/win64/gtest.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\lib\Support\ABIBreak.cpp" />
+    <ClCompile Include="..\lib\Support\AddressRanges.cpp" />
+    <ClCompile Include="..\lib\Support\Allocator.cpp" />
+    <ClCompile Include="..\lib\Support\APFixedPoint.cpp" />
+    <ClCompile Include="..\lib\Support\APFloat.cpp" />
+    <ClCompile Include="..\lib\Support\APInt.cpp" />
+    <ClCompile Include="..\lib\Support\APSInt.cpp" />
+    <ClCompile Include="..\lib\Support\ARMAttributeParser.cpp" />
+    <ClCompile Include="..\lib\Support\ARMBuildAttrs.cpp" />
+    <ClCompile Include="..\lib\Support\ARMTargetParser.cpp" />
+    <ClCompile Include="..\lib\Support\ARMWinEH.cpp" />
+    <ClCompile Include="..\lib\Support\Atomic.cpp" />
+    <ClCompile Include="..\lib\Support\AutoConvert.cpp" />
+    <ClCompile Include="..\lib\Support\BinaryStreamError.cpp" />
+    <ClCompile Include="..\lib\Support\BinaryStreamReader.cpp" />
+    <ClCompile Include="..\lib\Support\BinaryStreamRef.cpp" />
+    <ClCompile Include="..\lib\Support\BinaryStreamWriter.cpp" />
+    <ClCompile Include="..\lib\Support\BlockFrequency.cpp" />
+    <ClCompile Include="..\lib\Support\BranchProbability.cpp" />
+    <ClCompile Include="..\lib\Support\BuryPointer.cpp" />
+    <ClCompile Include="..\lib\Support\CachePruning.cpp" />
+    <ClCompile Include="..\lib\Support\Caching.cpp" />
+    <ClCompile Include="..\lib\Support\Chrono.cpp" />
+    <ClCompile Include="..\lib\Support\circular_raw_ostream.cpp" />
+    <ClCompile Include="..\lib\Support\CodeGenCoverage.cpp" />
+    <ClCompile Include="..\lib\Support\COM.cpp" />
+    <ClCompile Include="..\lib\Support\CommandLine.cpp" />
+    <ClCompile Include="..\lib\Support\Compression.cpp" />
+    <ClCompile Include="..\lib\Support\ConvertUTF.cpp" />
+    <ClCompile Include="..\lib\Support\ConvertUTFWrapper.cpp" />
+    <ClCompile Include="..\lib\Support\CrashRecoveryContext.cpp" />
+    <ClCompile Include="..\lib\Support\CRC.cpp" />
+    <ClCompile Include="..\lib\Support\CSKYAttributeParser.cpp" />
+    <ClCompile Include="..\lib\Support\CSKYAttributes.cpp" />
+    <ClCompile Include="..\lib\Support\CSKYTargetParser.cpp" />
+    <ClCompile Include="..\lib\Support\DAGDeltaAlgorithm.cpp" />
+    <ClCompile Include="..\lib\Support\DataExtractor.cpp" />
+    <ClCompile Include="..\lib\Support\Debug.cpp" />
+    <ClCompile Include="..\lib\Support\DebugCounter.cpp" />
+    <ClCompile Include="..\lib\Support\DeltaAlgorithm.cpp" />
+    <ClCompile Include="..\lib\Support\DivisionByConstantInfo.cpp" />
+    <ClCompile Include="..\lib\Support\DJB.cpp" />
+    <ClCompile Include="..\lib\Support\DynamicLibrary.cpp" />
+    <ClCompile Include="..\lib\Support\ELFAttributeParser.cpp" />
+    <ClCompile Include="..\lib\Support\ELFAttributes.cpp" />
+    <ClCompile Include="..\lib\Support\Errno.cpp" />
+    <ClCompile Include="..\lib\Support\Error.cpp" />
+    <ClCompile Include="..\lib\Support\ErrorHandling.cpp" />
+    <ClCompile Include="..\lib\Support\ExtensibleRTTI.cpp" />
+    <ClCompile Include="..\lib\Support\FileCollector.cpp" />
+    <ClCompile Include="..\lib\Support\FileOutputBuffer.cpp" />
+    <ClCompile Include="..\lib\Support\FileUtilities.cpp" />
+    <ClCompile Include="..\lib\Support\FoldingSet.cpp" />
+    <ClCompile Include="..\lib\Support\FormattedStream.cpp" />
+    <ClCompile Include="..\lib\Support\FormatVariadic.cpp" />
+    <ClCompile Include="..\lib\Support\GlobPattern.cpp" />
+    <ClCompile Include="..\lib\Support\GraphWriter.cpp" />
+    <ClCompile Include="..\lib\Support\Hashing.cpp" />
+    <ClCompile Include="..\lib\Support\Host.cpp" />
+    <ClCompile Include="..\lib\Support\InitLLVM.cpp" />
+    <ClCompile Include="..\lib\Support\InstructionCost.cpp" />
+    <ClCompile Include="..\lib\Support\IntEqClasses.cpp" />
+    <ClCompile Include="..\lib\Support\IntervalMap.cpp" />
+    <ClCompile Include="..\lib\Support\JSON.cpp" />
+    <ClCompile Include="..\lib\Support\KnownBits.cpp" />
+    <ClCompile Include="..\lib\Support\LEB128.cpp" />
+    <ClCompile Include="..\lib\Support\LineIterator.cpp" />
+    <ClCompile Include="..\lib\Support\Locale.cpp" />
+    <ClCompile Include="..\lib\Support\LockFileManager.cpp" />
+    <ClCompile Include="..\lib\Support\LowLevelType.cpp" />
+    <ClCompile Include="..\lib\Support\ManagedStatic.cpp" />
+    <ClCompile Include="..\lib\Support\MathExtras.cpp" />
+    <ClCompile Include="..\lib\Support\MD5.cpp" />
+    <ClCompile Include="..\lib\Support\MemAlloc.cpp" />
+    <ClCompile Include="..\lib\Support\Memory.cpp" />
+    <ClCompile Include="..\lib\Support\MemoryBuffer.cpp" />
+    <ClCompile Include="..\lib\Support\MemoryBufferRef.cpp" />
+    <ClCompile Include="..\lib\Support\MSP430AttributeParser.cpp" />
+    <ClCompile Include="..\lib\Support\MSP430Attributes.cpp" />
+    <ClCompile Include="..\lib\Support\NativeFormatting.cpp" />
+    <ClCompile Include="..\lib\Support\OptimizedStructLayout.cpp" />
+    <ClCompile Include="..\lib\Support\Optional.cpp" />
+    <ClCompile Include="..\lib\Support\Parallel.cpp" />
+    <ClCompile Include="..\lib\Support\Path.cpp" />
+    <ClCompile Include="..\lib\Support\PluginLoader.cpp" />
+    <ClCompile Include="..\lib\Support\PrettyStackTrace.cpp" />
+    <ClCompile Include="..\lib\Support\Process.cpp" />
+    <ClCompile Include="..\lib\Support\Program.cpp" />
+    <ClCompile Include="..\lib\Support\RandomNumberGenerator.cpp" />
+    <ClCompile Include="..\lib\Support\raw_ostream.cpp" />
+    <ClCompile Include="..\lib\Support\raw_os_ostream.cpp" />
+    <ClCompile Include="..\lib\Support\regcomp.c" />
+    <ClCompile Include="..\lib\Support\regerror.c" />
+    <ClCompile Include="..\lib\Support\Regex.cpp" />
+    <ClCompile Include="..\lib\Support\regexec.c" />
+    <ClCompile Include="..\lib\Support\regfree.c" />
+    <ClCompile Include="..\lib\Support\regstrlcpy.c" />
+    <ClCompile Include="..\lib\Support\RISCVAttributeParser.cpp" />
+    <ClCompile Include="..\lib\Support\RISCVAttributes.cpp" />
+    <ClCompile Include="..\lib\Support\RISCVISAInfo.cpp" />
+    <ClCompile Include="..\lib\Support\RWMutex.cpp" />
+    <ClCompile Include="..\lib\Support\ScaledNumber.cpp" />
+    <ClCompile Include="..\lib\Support\ScopedPrinter.cpp" />
+    <ClCompile Include="..\lib\Support\SHA1.cpp" />
+    <ClCompile Include="..\lib\Support\SHA256.cpp" />
+    <ClCompile Include="..\lib\Support\Signals.cpp" />
+    <ClCompile Include="..\lib\Support\Signposts.cpp" />
+    <ClCompile Include="..\lib\Support\SmallPtrSet.cpp" />
+    <ClCompile Include="..\lib\Support\SmallVector.cpp" />
+    <ClCompile Include="..\lib\Support\SourceMgr.cpp" />
+    <ClCompile Include="..\lib\Support\SpecialCaseList.cpp" />
+    <ClCompile Include="..\lib\Support\Statistic.cpp" />
+    <ClCompile Include="..\lib\Support\StringExtras.cpp" />
+    <ClCompile Include="..\lib\Support\StringMap.cpp" />
+    <ClCompile Include="..\lib\Support\StringRef.cpp" />
+    <ClCompile Include="..\lib\Support\StringSaver.cpp" />
+    <ClCompile Include="..\lib\Support\SuffixTree.cpp" />
+    <ClCompile Include="..\lib\Support\SystemUtils.cpp" />
+    <ClCompile Include="..\lib\Support\TargetParser.cpp" />
+    <ClCompile Include="..\lib\Support\TarWriter.cpp" />
+    <ClCompile Include="..\lib\Support\Threading.cpp" />
+    <ClCompile Include="..\lib\Support\ThreadLocal.cpp" />
+    <ClCompile Include="..\lib\Support\ThreadPool.cpp" />
+    <ClCompile Include="..\lib\Support\TimeProfiler.cpp" />
+    <ClCompile Include="..\lib\Support\Timer.cpp" />
+    <ClCompile Include="..\lib\Support\ToolOutputFile.cpp" />
+    <ClCompile Include="..\lib\Support\TrigramIndex.cpp" />
+    <ClCompile Include="..\lib\Support\Triple.cpp" />
+    <ClCompile Include="..\lib\Support\Twine.cpp" />
+    <ClCompile Include="..\lib\Support\TypeSize.cpp" />
+    <ClCompile Include="..\lib\Support\Unicode.cpp" />
+    <ClCompile Include="..\lib\Support\UnicodeCaseFold.cpp" />
+    <ClCompile Include="..\lib\Support\UnicodeNameToCodepoint.cpp" />
+    <ClCompile Include="..\lib\Support\UnicodeNameToCodepointGenerated.cpp" />
+    <ClCompile Include="..\lib\Support\Valgrind.cpp" />
+    <ClCompile Include="..\lib\Support\VersionTuple.cpp" />
+    <ClCompile Include="..\lib\Support\VirtualFileSystem.cpp" />
+    <ClCompile Include="..\lib\Support\Watchdog.cpp" />
+    <ClCompile Include="..\lib\Support\WithColor.cpp" />
+    <ClCompile Include="..\lib\Support\xxhash.cpp" />
+    <ClCompile Include="..\lib\Support\YAMLParser.cpp" />
+    <ClCompile Include="..\lib\Support\YAMLTraits.cpp" />
+    <ClCompile Include="..\lib\Support\Z3Solver.cpp" />
+    <ClCompile Include="..\unittests\ADT\SmallStringTest.cpp" />
+    <ClCompile Include="..\unittests\ADT\SmallVectorTest.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\lib\Support\DebugOptions.h" />
+    <ClInclude Include="..\lib\Support\regex2.h" />
+    <ClInclude Include="..\lib\Support\regex_impl.h" />
+    <ClInclude Include="..\lib\Support\regutils.h" />
+    <ClInclude Include="..\llvm\ADT\AddressRanges.h" />
+    <ClInclude Include="..\llvm\ADT\AllocatorList.h" />
+    <ClInclude Include="..\llvm\ADT\Any.h" />
+    <ClInclude Include="..\llvm\ADT\APFixedPoint.h" />
+    <ClInclude Include="..\llvm\ADT\APFloat.h" />
+    <ClInclude Include="..\llvm\ADT\APInt.h" />
+    <ClInclude Include="..\llvm\ADT\APSInt.h" />
+    <ClInclude Include="..\llvm\ADT\ArrayRef.h" />
+    <ClInclude Include="..\llvm\ADT\bit.h" />
+    <ClInclude Include="..\llvm\ADT\Bitfields.h" />
+    <ClInclude Include="..\llvm\ADT\BitmaskEnum.h" />
+    <ClInclude Include="..\llvm\ADT\BitVector.h" />
+    <ClInclude Include="..\llvm\ADT\BreadthFirstIterator.h" />
+    <ClInclude Include="..\llvm\ADT\CachedHashString.h" />
+    <ClInclude Include="..\llvm\ADT\CoalescingBitVector.h" />
+    <ClInclude Include="..\llvm\ADT\CombinationGenerator.h" />
+    <ClInclude Include="..\llvm\ADT\DAGDeltaAlgorithm.h" />
+    <ClInclude Include="..\llvm\ADT\DeltaAlgorithm.h" />
+    <ClInclude Include="..\llvm\ADT\DenseMap.h" />
+    <ClInclude Include="..\llvm\ADT\DenseMapInfo.h" />
+    <ClInclude Include="..\llvm\ADT\DenseSet.h" />
+    <ClInclude Include="..\llvm\ADT\DepthFirstIterator.h" />
+    <ClInclude Include="..\llvm\ADT\DirectedGraph.h" />
+    <ClInclude Include="..\llvm\ADT\edit_distance.h" />
+    <ClInclude Include="..\llvm\ADT\EnumeratedArray.h" />
+    <ClInclude Include="..\llvm\ADT\EpochTracker.h" />
+    <ClInclude Include="..\llvm\ADT\EquivalenceClasses.h" />
+    <ClInclude Include="..\llvm\ADT\fallible_iterator.h" />
+    <ClInclude Include="..\llvm\ADT\FloatingPointMode.h" />
+    <ClInclude Include="..\llvm\ADT\FoldingSet.h" />
+    <ClInclude Include="..\llvm\ADT\FunctionExtras.h" />
+    <ClInclude Include="..\llvm\ADT\GenericCycleImpl.h" />
+    <ClInclude Include="..\llvm\ADT\GenericCycleInfo.h" />
+    <ClInclude Include="..\llvm\ADT\GenericSSAContext.h" />
+    <ClInclude Include="..\llvm\ADT\GraphTraits.h" />
+    <ClInclude Include="..\llvm\ADT\Hashing.h" />
+    <ClInclude Include="..\llvm\ADT\identity.h" />
+    <ClInclude Include="..\llvm\ADT\ilist.h" />
+    <ClInclude Include="..\llvm\ADT\ilist_base.h" />
+    <ClInclude Include="..\llvm\ADT\ilist_iterator.h" />
+    <ClInclude Include="..\llvm\ADT\ilist_node.h" />
+    <ClInclude Include="..\llvm\ADT\ilist_node_base.h" />
+    <ClInclude Include="..\llvm\ADT\ilist_node_options.h" />
+    <ClInclude Include="..\llvm\ADT\ImmutableList.h" />
+    <ClInclude Include="..\llvm\ADT\ImmutableMap.h" />
+    <ClInclude Include="..\llvm\ADT\ImmutableSet.h" />
+    <ClInclude Include="..\llvm\ADT\IndexedMap.h" />
+    <ClInclude Include="..\llvm\ADT\IntEqClasses.h" />
+    <ClInclude Include="..\llvm\ADT\IntervalMap.h" />
+    <ClInclude Include="..\llvm\ADT\IntrusiveRefCntPtr.h" />
+    <ClInclude Include="..\llvm\ADT\iterator.h" />
+    <ClInclude Include="..\llvm\ADT\iterator_range.h" />
+    <ClInclude Include="..\llvm\ADT\MapVector.h" />
+    <ClInclude Include="..\llvm\ADT\None.h" />
+    <ClInclude Include="..\llvm\ADT\Optional.h" />
+    <ClInclude Include="..\llvm\ADT\PackedVector.h" />
+    <ClInclude Include="..\llvm\ADT\PointerEmbeddedInt.h" />
+    <ClInclude Include="..\llvm\ADT\PointerIntPair.h" />
+    <ClInclude Include="..\llvm\ADT\PointerSumType.h" />
+    <ClInclude Include="..\llvm\ADT\PointerUnion.h" />
+    <ClInclude Include="..\llvm\ADT\PostOrderIterator.h" />
+    <ClInclude Include="..\llvm\ADT\PriorityQueue.h" />
+    <ClInclude Include="..\llvm\ADT\PriorityWorklist.h" />
+    <ClInclude Include="..\llvm\ADT\SCCIterator.h" />
+    <ClInclude Include="..\llvm\ADT\ScopedHashTable.h" />
+    <ClInclude Include="..\llvm\ADT\ScopeExit.h" />
+    <ClInclude Include="..\llvm\ADT\Sequence.h" />
+    <ClInclude Include="..\llvm\ADT\SetOperations.h" />
+    <ClInclude Include="..\llvm\ADT\SetVector.h" />
+    <ClInclude Include="..\llvm\ADT\simple_ilist.h" />
+    <ClInclude Include="..\llvm\ADT\SmallBitVector.h" />
+    <ClInclude Include="..\llvm\ADT\SmallPtrSet.h" />
+    <ClInclude Include="..\llvm\ADT\SmallSet.h" />
+    <ClInclude Include="..\llvm\ADT\SmallString.h" />
+    <ClInclude Include="..\llvm\ADT\SmallVector.h" />
+    <ClInclude Include="..\llvm\ADT\SparseBitVector.h" />
+    <ClInclude Include="..\llvm\ADT\SparseMultiSet.h" />
+    <ClInclude Include="..\llvm\ADT\SparseSet.h" />
+    <ClInclude Include="..\llvm\ADT\Statistic.h" />
+    <ClInclude Include="..\llvm\ADT\STLArrayExtras.h" />
+    <ClInclude Include="..\llvm\ADT\STLExtras.h" />
+    <ClInclude Include="..\llvm\ADT\STLForwardCompat.h" />
+    <ClInclude Include="..\llvm\ADT\STLFunctionalExtras.h" />
+    <ClInclude Include="..\llvm\ADT\StringExtras.h" />
+    <ClInclude Include="..\llvm\ADT\StringMap.h" />
+    <ClInclude Include="..\llvm\ADT\StringMapEntry.h" />
+    <ClInclude Include="..\llvm\ADT\StringRef.h" />
+    <ClInclude Include="..\llvm\ADT\StringSet.h" />
+    <ClInclude Include="..\llvm\ADT\StringSwitch.h" />
+    <ClInclude Include="..\llvm\ADT\TinyPtrVector.h" />
+    <ClInclude Include="..\llvm\ADT\Triple.h" />
+    <ClInclude Include="..\llvm\ADT\Twine.h" />
+    <ClInclude Include="..\llvm\ADT\TypeSwitch.h" />
+    <ClInclude Include="..\llvm\ADT\UniqueVector.h" />
+    <ClInclude Include="..\llvm\Config\abi-breaking.h" />
+    <ClInclude Include="..\llvm\Config\config.h" />
+    <ClInclude Include="..\llvm\Config\llvm-config.h" />
+    <ClInclude Include="..\llvm\Support\AArch64TargetParser.h" />
+    <ClInclude Include="..\llvm\Support\Alignment.h" />
+    <ClInclude Include="..\llvm\Support\AlignOf.h" />
+    <ClInclude Include="..\llvm\Support\Allocator.h" />
+    <ClInclude Include="..\llvm\Support\AllocatorBase.h" />
+    <ClInclude Include="..\llvm\Support\AMDGPUMetadata.h" />
+    <ClInclude Include="..\llvm\Support\AMDHSAKernelDescriptor.h" />
+    <ClInclude Include="..\llvm\Support\ARMAttributeParser.h" />
+    <ClInclude Include="..\llvm\Support\ARMBuildAttributes.h" />
+    <ClInclude Include="..\llvm\Support\ARMEHABI.h" />
+    <ClInclude Include="..\llvm\Support\ARMTargetParser.h" />
+    <ClInclude Include="..\llvm\Support\ARMWinEH.h" />
+    <ClInclude Include="..\llvm\Support\ArrayRecycler.h" />
+    <ClInclude Include="..\llvm\Support\Atomic.h" />
+    <ClInclude Include="..\llvm\Support\AtomicOrdering.h" />
+    <ClInclude Include="..\llvm\Support\AutoConvert.h" />
+    <ClInclude Include="..\llvm\Support\Automaton.h" />
+    <ClInclude Include="..\llvm\Support\Base64.h" />
+    <ClInclude Include="..\llvm\Support\BCD.h" />
+    <ClInclude Include="..\llvm\Support\BinaryByteStream.h" />
+    <ClInclude Include="..\llvm\Support\BinaryItemStream.h" />
+    <ClInclude Include="..\llvm\Support\BinaryStream.h" />
+    <ClInclude Include="..\llvm\Support\BinaryStreamArray.h" />
+    <ClInclude Include="..\llvm\Support\BinaryStreamError.h" />
+    <ClInclude Include="..\llvm\Support\BinaryStreamReader.h" />
+    <ClInclude Include="..\llvm\Support\BinaryStreamRef.h" />
+    <ClInclude Include="..\llvm\Support\BinaryStreamWriter.h" />
+    <ClInclude Include="..\llvm\Support\BLAKE3.h" />
+    <ClInclude Include="..\llvm\Support\BlockFrequency.h" />
+    <ClInclude Include="..\llvm\Support\BranchProbability.h" />
+    <ClInclude Include="..\llvm\Support\BuryPointer.h" />
+    <ClInclude Include="..\llvm\Support\CachePruning.h" />
+    <ClInclude Include="..\llvm\Support\Caching.h" />
+    <ClInclude Include="..\llvm\Support\Capacity.h" />
+    <ClInclude Include="..\llvm\Support\Casting.h" />
+    <ClInclude Include="..\llvm\Support\CBindingWrapping.h" />
+    <ClInclude Include="..\llvm\Support\CFGDiff.h" />
+    <ClInclude Include="..\llvm\Support\CFGUpdate.h" />
+    <ClInclude Include="..\llvm\Support\CheckedArithmetic.h" />
+    <ClInclude Include="..\llvm\Support\Chrono.h" />
+    <ClInclude Include="..\llvm\Support\circular_raw_ostream.h" />
+    <ClInclude Include="..\llvm\Support\CodeGen.h" />
+    <ClInclude Include="..\llvm\Support\CodeGenCoverage.h" />
+    <ClInclude Include="..\llvm\Support\COM.h" />
+    <ClInclude Include="..\llvm\Support\CommandLine.h" />
+    <ClInclude Include="..\llvm\Support\Compiler.h" />
+    <ClInclude Include="..\llvm\Support\Compression.h" />
+    <ClInclude Include="..\llvm\Support\ConvertUTF.h" />
+    <ClInclude Include="..\llvm\Support\CrashRecoveryContext.h" />
+    <ClInclude Include="..\llvm\Support\CRC.h" />
+    <ClInclude Include="..\llvm\Support\CSKYAttributeParser.h" />
+    <ClInclude Include="..\llvm\Support\CSKYAttributes.h" />
+    <ClInclude Include="..\llvm\Support\CSKYTargetParser.h" />
+    <ClInclude Include="..\llvm\Support\DataExtractor.h" />
+    <ClInclude Include="..\llvm\Support\DataTypes.h" />
+    <ClInclude Include="..\llvm\Support\Debug.h" />
+    <ClInclude Include="..\llvm\Support\DebugCounter.h" />
+    <ClInclude Include="..\llvm\Support\Discriminator.h" />
+    <ClInclude Include="..\llvm\Support\DivisionByConstantInfo.h" />
+    <ClInclude Include="..\llvm\Support\DJB.h" />
+    <ClInclude Include="..\llvm\Support\DOTGraphTraits.h" />
+    <ClInclude Include="..\llvm\Support\Duration.h" />
+    <ClInclude Include="..\llvm\Support\DXILOperationCommon.h" />
+    <ClInclude Include="..\llvm\Support\DynamicLibrary.h" />
+    <ClInclude Include="..\llvm\Support\ELFAttributeParser.h" />
+    <ClInclude Include="..\llvm\Support\ELFAttributes.h" />
+    <ClInclude Include="..\llvm\Support\Endian.h" />
+    <ClInclude Include="..\llvm\Support\EndianStream.h" />
+    <ClInclude Include="..\llvm\Support\Errc.h" />
+    <ClInclude Include="..\llvm\Support\Errno.h" />
+    <ClInclude Include="..\llvm\Support\Error.h" />
+    <ClInclude Include="..\llvm\Support\ErrorHandling.h" />
+    <ClInclude Include="..\llvm\Support\ErrorOr.h" />
+    <ClInclude Include="..\llvm\Support\ExitCodes.h" />
+    <ClInclude Include="..\llvm\Support\ExtensibleRTTI.h" />
+    <ClInclude Include="..\llvm\Support\FileCollector.h" />
+    <ClInclude Include="..\llvm\Support\FileOutputBuffer.h" />
+    <ClInclude Include="..\llvm\Support\FileSystem.h" />
+    <ClInclude Include="..\llvm\Support\FileUtilities.h" />
+    <ClInclude Include="..\llvm\Support\Format.h" />
+    <ClInclude Include="..\llvm\Support\FormatAdapters.h" />
+    <ClInclude Include="..\llvm\Support\FormatCommon.h" />
+    <ClInclude Include="..\llvm\Support\FormatProviders.h" />
+    <ClInclude Include="..\llvm\Support\FormattedStream.h" />
+    <ClInclude Include="..\llvm\Support\FormatVariadic.h" />
+    <ClInclude Include="..\llvm\Support\FormatVariadicDetails.h" />
+    <ClInclude Include="..\llvm\Support\GenericDomTree.h" />
+    <ClInclude Include="..\llvm\Support\GenericDomTreeConstruction.h" />
+    <ClInclude Include="..\llvm\Support\GenericIteratedDominanceFrontier.h" />
+    <ClInclude Include="..\llvm\Support\GlobPattern.h" />
+    <ClInclude Include="..\llvm\Support\GraphWriter.h" />
+    <ClInclude Include="..\llvm\Support\HashBuilder.h" />
+    <ClInclude Include="..\llvm\Support\Host.h" />
+    <ClInclude Include="..\llvm\Support\InitLLVM.h" />
+    <ClInclude Include="..\llvm\Support\InstructionCost.h" />
+    <ClInclude Include="..\llvm\Support\ItaniumManglingCanonicalizer.h" />
+    <ClInclude Include="..\llvm\Support\JSON.h" />
+    <ClInclude Include="..\llvm\Support\KnownBits.h" />
+    <ClInclude Include="..\llvm\Support\LEB128.h" />
+    <ClInclude Include="..\llvm\Support\LineIterator.h" />
+    <ClInclude Include="..\llvm\Support\Locale.h" />
+    <ClInclude Include="..\llvm\Support\LockFileManager.h" />
+    <ClInclude Include="..\llvm\Support\LowLevelTypeImpl.h" />
+    <ClInclude Include="..\llvm\Support\MachineValueType.h" />
+    <ClInclude Include="..\llvm\Support\ManagedStatic.h" />
+    <ClInclude Include="..\llvm\Support\MathExtras.h" />
+    <ClInclude Include="..\llvm\Support\MD5.h" />
+    <ClInclude Include="..\llvm\Support\MemAlloc.h" />
+    <ClInclude Include="..\llvm\Support\Memory.h" />
+    <ClInclude Include="..\llvm\Support\MemoryBuffer.h" />
+    <ClInclude Include="..\llvm\Support\MemoryBufferRef.h" />
+    <ClInclude Include="..\llvm\Support\MipsABIFlags.h" />
+    <ClInclude Include="..\llvm\Support\MSP430AttributeParser.h" />
+    <ClInclude Include="..\llvm\Support\MSP430Attributes.h" />
+    <ClInclude Include="..\llvm\Support\MSVCErrorWorkarounds.h" />
+    <ClInclude Include="..\llvm\Support\Mutex.h" />
+    <ClInclude Include="..\llvm\Support\NativeFormatting.h" />
+    <ClInclude Include="..\llvm\Support\OnDiskHashTable.h" />
+    <ClInclude Include="..\llvm\Support\OptimizedStructLayout.h" />
+    <ClInclude Include="..\llvm\Support\Parallel.h" />
+    <ClInclude Include="..\llvm\Support\Path.h" />
+    <ClInclude Include="..\llvm\Support\PGOOptions.h" />
+    <ClInclude Include="..\llvm\Support\PluginLoader.h" />
+    <ClInclude Include="..\llvm\Support\PointerLikeTypeTraits.h" />
+    <ClInclude Include="..\llvm\Support\PrettyStackTrace.h" />
+    <ClInclude Include="..\llvm\Support\Printable.h" />
+    <ClInclude Include="..\llvm\Support\Process.h" />
+    <ClInclude Include="..\llvm\Support\Program.h" />
+    <ClInclude Include="..\llvm\Support\RandomNumberGenerator.h" />
+    <ClInclude Include="..\llvm\Support\raw_ostream.h" />
+    <ClInclude Include="..\llvm\Support\raw_os_ostream.h" />
+    <ClInclude Include="..\llvm\Support\raw_sha1_ostream.h" />
+    <ClInclude Include="..\llvm\Support\Recycler.h" />
+    <ClInclude Include="..\llvm\Support\RecyclingAllocator.h" />
+    <ClInclude Include="..\llvm\Support\Regex.h" />
+    <ClInclude Include="..\llvm\Support\Registry.h" />
+    <ClInclude Include="..\llvm\Support\ReverseIteration.h" />
+    <ClInclude Include="..\llvm\Support\RISCVAttributeParser.h" />
+    <ClInclude Include="..\llvm\Support\RISCVAttributes.h" />
+    <ClInclude Include="..\llvm\Support\RISCVISAInfo.h" />
+    <ClInclude Include="..\llvm\Support\RWMutex.h" />
+    <ClInclude Include="..\llvm\Support\SaveAndRestore.h" />
+    <ClInclude Include="..\llvm\Support\ScaledNumber.h" />
+    <ClInclude Include="..\llvm\Support\ScopedPrinter.h" />
+    <ClInclude Include="..\llvm\Support\SHA1.h" />
+    <ClInclude Include="..\llvm\Support\SHA256.h" />
+    <ClInclude Include="..\llvm\Support\Signals.h" />
+    <ClInclude Include="..\llvm\Support\Signposts.h" />
+    <ClInclude Include="..\llvm\Support\SmallVectorMemoryBuffer.h" />
+    <ClInclude Include="..\llvm\Support\SMLoc.h" />
+    <ClInclude Include="..\llvm\Support\SMTAPI.h" />
+    <ClInclude Include="..\llvm\Support\SourceMgr.h" />
+    <ClInclude Include="..\llvm\Support\SpecialCaseList.h" />
+    <ClInclude Include="..\llvm\Support\StringSaver.h" />
+    <ClInclude Include="..\llvm\Support\SuffixTree.h" />
+    <ClInclude Include="..\llvm\Support\SwapByteOrder.h" />
+    <ClInclude Include="..\llvm\Support\SymbolRemappingReader.h" />
+    <ClInclude Include="..\llvm\Support\SystemUtils.h" />
+    <ClInclude Include="..\llvm\Support\TargetParser.h" />
+    <ClInclude Include="..\llvm\Support\TargetSelect.h" />
+    <ClInclude Include="..\llvm\Support\TarWriter.h" />
+    <ClInclude Include="..\llvm\Support\TaskQueue.h" />
+    <ClInclude Include="..\llvm\Support\thread.h" />
+    <ClInclude Include="..\llvm\Support\Threading.h" />
+    <ClInclude Include="..\llvm\Support\ThreadLocal.h" />
+    <ClInclude Include="..\llvm\Support\ThreadPool.h" />
+    <ClInclude Include="..\llvm\Support\TimeProfiler.h" />
+    <ClInclude Include="..\llvm\Support\Timer.h" />
+    <ClInclude Include="..\llvm\Support\ToolOutputFile.h" />
+    <ClInclude Include="..\llvm\Support\TrailingObjects.h" />
+    <ClInclude Include="..\llvm\Support\TrigramIndex.h" />
+    <ClInclude Include="..\llvm\Support\TypeName.h" />
+    <ClInclude Include="..\llvm\Support\TypeSize.h" />
+    <ClInclude Include="..\llvm\Support\type_traits.h" />
+    <ClInclude Include="..\llvm\Support\Unicode.h" />
+    <ClInclude Include="..\llvm\Support\UnicodeCharRanges.h" />
+    <ClInclude Include="..\llvm\Support\Valgrind.h" />
+    <ClInclude Include="..\llvm\Support\VersionTuple.h" />
+    <ClInclude Include="..\llvm\Support\VirtualFileSystem.h" />
+    <ClInclude Include="..\llvm\Support\Watchdog.h" />
+    <ClInclude Include="..\llvm\Support\Win64EH.h" />
+    <ClInclude Include="..\llvm\Support\WindowsError.h" />
+    <ClInclude Include="..\llvm\Support\WithColor.h" />
+    <ClInclude Include="..\llvm\Support\X86DisassemblerDecoderCommon.h" />
+    <ClInclude Include="..\llvm\Support\X86TargetParser.h" />
+    <ClInclude Include="..\llvm\Support\xxhash.h" />
+    <ClInclude Include="..\llvm\Support\YAMLParser.h" />
+    <ClInclude Include="..\llvm\Support\YAMLTraits.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\llvm\Support\AArch64TargetParser.def" />
+    <None Include="..\llvm\Support\ARMTargetParser.def" />
+    <None Include="..\llvm\Support\CSKYTargetParser.def" />
+    <None Include="..\llvm\Support\RISCVTargetParser.def" />
+    <None Include="..\llvm\Support\TargetOpcodes.def" />
+    <None Include="..\llvm\Support\X86TargetParser.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\llvm\Support\CMakeLists.txt" />
+    <Text Include="..\llvm\Support\LICENSE.TXT" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
