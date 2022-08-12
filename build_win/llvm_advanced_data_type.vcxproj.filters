@@ -189,6 +189,21 @@
     <ClCompile Include="..\unittests\ADT\TwineTest.cpp">
       <Filter>unitest</Filter>
     </ClCompile>
+    <ClCompile Include="..\lib\Support\APFixedPoint.cpp">
+      <Filter>lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\Support\APFloat.cpp">
+      <Filter>lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\Support\Error.cpp">
+      <Filter>lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\unittests\ADT\APFixedPointTest.cpp">
+      <Filter>unitest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\unittests\ADT\APFloatTest.cpp">
+      <Filter>unitest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\llvm\ADT\AddressRanges.h">

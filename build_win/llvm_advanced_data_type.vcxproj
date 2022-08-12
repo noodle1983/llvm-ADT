@@ -145,9 +145,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\lib\ADTAdapter.cpp" />
+    <ClCompile Include="..\lib\Support\APFixedPoint.cpp" />
+    <ClCompile Include="..\lib\Support\APFloat.cpp" />
     <ClCompile Include="..\lib\Support\APInt.cpp" />
     <ClCompile Include="..\lib\Support\APSInt.cpp" />
     <ClCompile Include="..\lib\Support\circular_raw_ostream.cpp" />
+    <ClCompile Include="..\lib\Support\Error.cpp" />
     <ClCompile Include="..\lib\Support\FoldingSet.cpp" />
     <ClCompile Include="..\lib\Support\FormatVariadic.cpp" />
     <ClCompile Include="..\lib\Support\Hashing.cpp" />
@@ -163,6 +166,8 @@
     <ClCompile Include="..\lib\Support\StringRef.cpp" />
     <ClCompile Include="..\lib\Support\Twine.cpp" />
     <ClCompile Include="..\unittests\ADT\AnyTest.cpp" />
+    <ClCompile Include="..\unittests\ADT\APFixedPointTest.cpp" />
+    <ClCompile Include="..\unittests\ADT\APFloatTest.cpp" />
     <ClCompile Include="..\unittests\ADT\APIntTest.cpp" />
     <ClCompile Include="..\unittests\ADT\APSIntTest.cpp" />
     <ClCompile Include="..\unittests\ADT\ArrayRefTest.cpp" />

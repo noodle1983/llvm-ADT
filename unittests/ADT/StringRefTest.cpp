@@ -935,17 +935,17 @@ struct GetDoubleStrings {
                      {"0x0.0000000000001P-1023", true, false, 0.0},
                     };
 
-//TEST(StringRefTest, getAsDouble) {
-//  for (const auto &Entry : DoubleStrings) {
-//    double Result;
-//    StringRef S(Entry.Str);
-//    EXPECT_EQ(Entry.ShouldFail, S.getAsDouble(Result, Entry.AllowInexact));
-//    if (!Entry.ShouldFail) {
-//      EXPECT_EQ(Result, Entry.D);
-//    }
-//  }
-//}
-//
+TEST(StringRefTest, getAsDouble) {
+  for (const auto &Entry : DoubleStrings) {
+    double Result;
+    StringRef S(Entry.Str);
+    EXPECT_EQ(Entry.ShouldFail, S.getAsDouble(Result, Entry.AllowInexact));
+    if (!Entry.ShouldFail) {
+      EXPECT_EQ(Result, Entry.D);
+    }
+  }
+}
+
 static const char *join_input[] = { "a", "b", "c" };
 static const char join_result1[] = "a";
 static const char join_result2[] = "a:b:c";

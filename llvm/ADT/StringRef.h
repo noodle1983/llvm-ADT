@@ -584,7 +584,7 @@ namespace llvm {
     /// cannot be represented exactly.  Otherwise, the function only fails
     /// in case of an overflow or underflow, or an invalid floating point
     /// representation.
-   // bool getAsDouble(double &Result, bool AllowInexact = true) const;
+    bool getAsDouble(double &Result, bool AllowInexact = true) const;
 
     /// @}
     /// @name String Operations
