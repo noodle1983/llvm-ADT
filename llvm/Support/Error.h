@@ -1381,7 +1381,7 @@ private:
   void checkError(Error Err) const {
     if (Err) {
       int ExitCode = GetExitCode(Err);
-      logAllUnhandledErrors(std::move(Err), errs(), Banner);
+      //logAllUnhandledErrors(std::move(Err), errs(), Banner);
       exit(ExitCode);
     }
   }

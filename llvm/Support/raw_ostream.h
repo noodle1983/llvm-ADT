@@ -38,14 +38,14 @@ class FormattedNumber;
 class FormattedBytes;
 template <class T> class LLVM_NODISCARD Expected;
 
-namespace sys {
-namespace fs {
-enum FileAccess : unsigned;
-enum OpenFlags : unsigned;
-enum CreationDisposition : unsigned;
-class FileLocker;
-} // end namespace fs
-} // end namespace sys
+//namespace sys {
+//namespace fs {
+//enum FileAccess : unsigned;
+//enum OpenFlags : unsigned;
+//enum CreationDisposition : unsigned;
+//class FileLocker;
+//} // end namespace fs
+//} // end namespace sys
 
 /// This class implements an extremely fast bulk output stream that can *only*
 /// output to a stream.  It does not support seeking, reopening, rewinding, line
@@ -441,153 +441,153 @@ public:
 
 /// A raw_ostream that writes to a file descriptor.
 ///
-class raw_fd_ostream : public raw_pwrite_stream {
-  int FD;
-  bool ShouldClose;
-  bool SupportsSeeking = false;
-  bool IsRegularFile = false;
-  mutable Optional<bool> HasColors;
-
-#ifdef _WIN32
-  /// True if this fd refers to a Windows console device. Mintty and other
-  /// terminal emulators are TTYs, but they are not consoles.
-  bool IsWindowsConsole = false;
-#endif
-
-  std::error_code EC;
-
-  uint64_t pos = 0;
-
-  /// See raw_ostream::write_impl.
-  void write_impl(const char *Ptr, size_t Size) override;
-
-  void pwrite_impl(const char *Ptr, size_t Size, uint64_t Offset) override;
-
-  /// Return the current position within the stream, not counting the bytes
-  /// currently in the buffer.
-  uint64_t current_pos() const override { return pos; }
-
-  /// Determine an efficient buffer size.
-  size_t preferred_buffer_size() const override;
-
-  void anchor() override;
-
-protected:
-  /// Set the flag indicating that an output error has been encountered.
-  void error_detected(std::error_code EC) { this->EC = EC; }
-
-  /// Return the file descriptor.
-  int get_fd() const { return FD; }
-
-  // Update the file position by increasing \p Delta.
-  void inc_pos(uint64_t Delta) { pos += Delta; }
-
-public:
-  /// Open the specified file for writing. If an error occurs, information
-  /// about the error is put into EC, and the stream should be immediately
-  /// destroyed;
-  /// \p Flags allows optional flags to control how the file will be opened.
-  ///
-  /// As a special case, if Filename is "-", then the stream will use
-  /// STDOUT_FILENO instead of opening a file. This will not close the stdout
-  /// descriptor.
-  raw_fd_ostream(StringRef Filename, std::error_code &EC);
-  raw_fd_ostream(StringRef Filename, std::error_code &EC,
-                 sys::fs::CreationDisposition Disp);
-  raw_fd_ostream(StringRef Filename, std::error_code &EC,
-                 sys::fs::FileAccess Access);
-  raw_fd_ostream(StringRef Filename, std::error_code &EC,
-                 sys::fs::OpenFlags Flags);
-  raw_fd_ostream(StringRef Filename, std::error_code &EC,
-                 sys::fs::CreationDisposition Disp, sys::fs::FileAccess Access,
-                 sys::fs::OpenFlags Flags);
-
-  /// FD is the file descriptor that this writes to.  If ShouldClose is true,
-  /// this closes the file when the stream is destroyed. If FD is for stdout or
-  /// stderr, it will not be closed.
-  raw_fd_ostream(int fd, bool shouldClose, bool unbuffered = false,
-                 OStreamKind K = OStreamKind::OK_OStream);
-
-  ~raw_fd_ostream() override;
-
-  /// Manually flush the stream and close the file. Note that this does not call
-  /// fsync.
-  void close();
-
-  bool supportsSeeking() const { return SupportsSeeking; }
-
-  bool isRegularFile() const { return IsRegularFile; }
-
-  /// Flushes the stream and repositions the underlying file descriptor position
-  /// to the offset specified from the beginning of the file.
-  uint64_t seek(uint64_t off);
-
-  bool is_displayed() const override;
-
-  bool has_colors() const override;
-
-  std::error_code error() const { return EC; }
-
-  /// Return the value of the flag in this raw_fd_ostream indicating whether an
-  /// output error has been encountered.
-  /// This doesn't implicitly flush any pending output.  Also, it doesn't
-  /// guarantee to detect all errors unless the stream has been closed.
-  bool has_error() const { return bool(EC); }
-
-  /// Set the flag read by has_error() to false. If the error flag is set at the
-  /// time when this raw_ostream's destructor is called, report_fatal_error is
-  /// called to report the error. Use clear_error() after handling the error to
-  /// avoid this behavior.
-  ///
-  ///   "Errors should never pass silently.
-  ///    Unless explicitly silenced."
-  ///      - from The Zen of Python, by Tim Peters
-  ///
-  void clear_error() { EC = std::error_code(); }
-
-  /// Locks the underlying file.
-  ///
-  /// @returns RAII object that releases the lock upon leaving the scope, if the
-  ///          locking was successful. Otherwise returns corresponding
-  ///          error code.
-  ///
-  /// The function blocks the current thread until the lock become available or
-  /// error occurs.
-  ///
-  /// Possible use of this function may be as follows:
-  ///
-  ///   @code{.cpp}
-  ///   if (auto L = stream.lock()) {
-  ///     // ... do action that require file to be locked.
-  ///   } else {
-  ///     handleAllErrors(std::move(L.takeError()), [&](ErrorInfoBase &EIB) {
-  ///       // ... handle lock error.
-  ///     });
-  ///   }
-  ///   @endcode
-  LLVM_NODISCARD Expected<sys::fs::FileLocker> lock();
-
-  /// Tries to lock the underlying file within the specified period.
-  ///
-  /// @returns RAII object that releases the lock upon leaving the scope, if the
-  ///          locking was successful. Otherwise returns corresponding
-  ///          error code.
-  ///
-  /// It is used as @ref lock.
-  LLVM_NODISCARD
-  Expected<sys::fs::FileLocker> tryLockFor(Duration const& Timeout);
-};
+//class raw_fd_ostream : public raw_pwrite_stream {
+//  int FD;
+//  bool ShouldClose;
+//  bool SupportsSeeking = false;
+//  bool IsRegularFile = false;
+//  mutable Optional<bool> HasColors;
+//
+//#ifdef _WIN32
+//  /// True if this fd refers to a Windows console device. Mintty and other
+//  /// terminal emulators are TTYs, but they are not consoles.
+//  bool IsWindowsConsole = false;
+//#endif
+//
+//  std::error_code EC;
+//
+//  uint64_t pos = 0;
+//
+//  /// See raw_ostream::write_impl.
+//  void write_impl(const char *Ptr, size_t Size) override;
+//
+//  void pwrite_impl(const char *Ptr, size_t Size, uint64_t Offset) override;
+//
+//  /// Return the current position within the stream, not counting the bytes
+//  /// currently in the buffer.
+//  uint64_t current_pos() const override { return pos; }
+//
+//  /// Determine an efficient buffer size.
+//  size_t preferred_buffer_size() const override;
+//
+//  void anchor() override;
+//
+//protected:
+//  /// Set the flag indicating that an output error has been encountered.
+//  void error_detected(std::error_code EC) { this->EC = EC; }
+//
+//  /// Return the file descriptor.
+//  int get_fd() const { return FD; }
+//
+//  // Update the file position by increasing \p Delta.
+//  void inc_pos(uint64_t Delta) { pos += Delta; }
+//
+//public:
+//  /// Open the specified file for writing. If an error occurs, information
+//  /// about the error is put into EC, and the stream should be immediately
+//  /// destroyed;
+//  /// \p Flags allows optional flags to control how the file will be opened.
+//  ///
+//  /// As a special case, if Filename is "-", then the stream will use
+//  /// STDOUT_FILENO instead of opening a file. This will not close the stdout
+//  /// descriptor.
+//  raw_fd_ostream(StringRef Filename, std::error_code &EC);
+//  raw_fd_ostream(StringRef Filename, std::error_code &EC,
+//                 sys::fs::CreationDisposition Disp);
+//  raw_fd_ostream(StringRef Filename, std::error_code &EC,
+//                 sys::fs::FileAccess Access);
+//  raw_fd_ostream(StringRef Filename, std::error_code &EC,
+//                 sys::fs::OpenFlags Flags);
+//  raw_fd_ostream(StringRef Filename, std::error_code &EC,
+//                 sys::fs::CreationDisposition Disp, sys::fs::FileAccess Access,
+//                 sys::fs::OpenFlags Flags);
+//
+//  /// FD is the file descriptor that this writes to.  If ShouldClose is true,
+//  /// this closes the file when the stream is destroyed. If FD is for stdout or
+//  /// stderr, it will not be closed.
+//  raw_fd_ostream(int fd, bool shouldClose, bool unbuffered = false,
+//                 OStreamKind K = OStreamKind::OK_OStream);
+//
+//  ~raw_fd_ostream() override;
+//
+//  /// Manually flush the stream and close the file. Note that this does not call
+//  /// fsync.
+//  void close();
+//
+//  bool supportsSeeking() const { return SupportsSeeking; }
+//
+//  bool isRegularFile() const { return IsRegularFile; }
+//
+//  /// Flushes the stream and repositions the underlying file descriptor position
+//  /// to the offset specified from the beginning of the file.
+//  uint64_t seek(uint64_t off);
+//
+//  bool is_displayed() const override;
+//
+//  bool has_colors() const override;
+//
+//  std::error_code error() const { return EC; }
+//
+//  /// Return the value of the flag in this raw_fd_ostream indicating whether an
+//  /// output error has been encountered.
+//  /// This doesn't implicitly flush any pending output.  Also, it doesn't
+//  /// guarantee to detect all errors unless the stream has been closed.
+//  bool has_error() const { return bool(EC); }
+//
+//  /// Set the flag read by has_error() to false. If the error flag is set at the
+//  /// time when this raw_ostream's destructor is called, report_fatal_error is
+//  /// called to report the error. Use clear_error() after handling the error to
+//  /// avoid this behavior.
+//  ///
+//  ///   "Errors should never pass silently.
+//  ///    Unless explicitly silenced."
+//  ///      - from The Zen of Python, by Tim Peters
+//  ///
+//  void clear_error() { EC = std::error_code(); }
+//
+//  /// Locks the underlying file.
+//  ///
+//  /// @returns RAII object that releases the lock upon leaving the scope, if the
+//  ///          locking was successful. Otherwise returns corresponding
+//  ///          error code.
+//  ///
+//  /// The function blocks the current thread until the lock become available or
+//  /// error occurs.
+//  ///
+//  /// Possible use of this function may be as follows:
+//  ///
+//  ///   @code{.cpp}
+//  ///   if (auto L = stream.lock()) {
+//  ///     // ... do action that require file to be locked.
+//  ///   } else {
+//  ///     handleAllErrors(std::move(L.takeError()), [&](ErrorInfoBase &EIB) {
+//  ///       // ... handle lock error.
+//  ///     });
+//  ///   }
+//  ///   @endcode
+//  LLVM_NODISCARD Expected<sys::fs::FileLocker> lock();
+//
+//  /// Tries to lock the underlying file within the specified period.
+//  ///
+//  /// @returns RAII object that releases the lock upon leaving the scope, if the
+//  ///          locking was successful. Otherwise returns corresponding
+//  ///          error code.
+//  ///
+//  /// It is used as @ref lock.
+//  LLVM_NODISCARD
+//  Expected<sys::fs::FileLocker> tryLockFor(Duration const& Timeout);
+//};
 
 /// This returns a reference to a raw_fd_ostream for standard output. Use it
 /// like: outs() << "foo" << "bar";
-raw_fd_ostream &outs();
+//raw_fd_ostream &outs();
 
 /// This returns a reference to a raw_ostream for standard error.
 /// Use it like: errs() << "foo" << "bar";
 /// By default, the stream is tied to stdout to ensure stdout is flushed before
 /// stderr is written, to ensure the error messages are written in their
 /// expected place.
-raw_fd_ostream &errs();
+//raw_fd_ostream &errs();
 
 /// This returns a reference to a raw_ostream which simply discards output.
 raw_ostream &nulls();
@@ -598,27 +598,27 @@ raw_ostream &nulls();
 
 /// A raw_ostream of a file for reading/writing/seeking.
 ///
-class raw_fd_stream : public raw_fd_ostream {
-public:
-  /// Open the specified file for reading/writing/seeking. If an error occurs,
-  /// information about the error is put into EC, and the stream should be
-  /// immediately destroyed.
-  raw_fd_stream(StringRef Filename, std::error_code &EC);
-
-  /// This reads the \p Size bytes into a buffer pointed by \p Ptr.
-  ///
-  /// \param Ptr The start of the buffer to hold data to be read.
-  ///
-  /// \param Size The number of bytes to be read.
-  ///
-  /// On success, the number of bytes read is returned, and the file position is
-  /// advanced by this number. On error, -1 is returned, use error() to get the
-  /// error code.
-  ssize_t read(char *Ptr, size_t Size);
-
-  /// Check if \p OS is a pointer of type raw_fd_stream*.
-  static bool classof(const raw_ostream *OS);
-};
+//class raw_fd_stream : public raw_fd_ostream {
+//public:
+//  /// Open the specified file for reading/writing/seeking. If an error occurs,
+//  /// information about the error is put into EC, and the stream should be
+//  /// immediately destroyed.
+//  raw_fd_stream(StringRef Filename, std::error_code &EC);
+//
+//  /// This reads the \p Size bytes into a buffer pointed by \p Ptr.
+//  ///
+//  /// \param Ptr The start of the buffer to hold data to be read.
+//  ///
+//  /// \param Size The number of bytes to be read.
+//  ///
+//  /// On success, the number of bytes read is returned, and the file position is
+//  /// advanced by this number. On error, -1 is returned, use error() to get the
+//  /// error code.
+//  ssize_t read(char *Ptr, size_t Size);
+//
+//  /// Check if \p OS is a pointer of type raw_fd_stream*.
+//  static bool classof(const raw_ostream *OS);
+//};
 
 //===----------------------------------------------------------------------===//
 // Output Stream Adaptors

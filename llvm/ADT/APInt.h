@@ -17,6 +17,7 @@
 
 #include "llvm/Support/Compiler.h"
 #include "llvm/Support/MathExtras.h"
+#include "llvm/ADT/StringRef.h"
 #include <cassert>
 #include <climits>
 #include <cstring>
@@ -2228,8 +2229,8 @@ APInt RoundingSDiv(const APInt &A, const APInt &B, APInt::Rounding RM);
 ///
 /// The returned value may have a different bit width from the input
 /// coefficients.
-Optional<APInt> SolveQuadraticEquationWrap(APInt A, APInt B, APInt C,
-                                           unsigned RangeWidth);
+//Optional<APInt> SolveQuadraticEquationWrap(APInt A, APInt B, APInt C,
+//                                           unsigned RangeWidth);
 
 /// Compare two values, and if they are different, return the position of the
 /// most significant bit that is different in the values.

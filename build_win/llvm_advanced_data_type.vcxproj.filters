@@ -33,9 +33,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\lib\Support\SmallVector.cpp">
       <Filter>lib</Filter>
     </ClCompile>
@@ -51,46 +48,19 @@
     <ClCompile Include="..\lib\Support\APInt.cpp">
       <Filter>lib</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\Support\ErrorHandling.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\Debug.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
     <ClCompile Include="..\lib\Support\raw_ostream.cpp">
       <Filter>lib</Filter>
     </ClCompile>
     <ClCompile Include="..\lib\Support\Hashing.cpp">
       <Filter>lib</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\Support\ManagedStatic.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
     <ClCompile Include="..\lib\Support\SmallPtrSet.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\APFloat.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\Error.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\Process.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\Program.cpp">
       <Filter>lib</Filter>
     </ClCompile>
     <ClCompile Include="..\lib\Support\FormatVariadic.cpp">
       <Filter>lib</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\Support\Path.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
     <ClCompile Include="..\lib\Support\NativeFormatting.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\CrashRecoveryContext.cpp">
       <Filter>lib</Filter>
     </ClCompile>
     <ClCompile Include="..\lib\Support\MemAlloc.cpp">
@@ -99,377 +69,125 @@
     <ClCompile Include="..\lib\Support\StringExtras.cpp">
       <Filter>lib</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\Support\ABIBreak.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\AddressRanges.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\Allocator.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\APFixedPoint.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
     <ClCompile Include="..\lib\Support\APSInt.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\ARMAttributeParser.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\ARMBuildAttrs.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\ARMTargetParser.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\ARMWinEH.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\Atomic.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\AutoConvert.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\BinaryStreamError.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\BinaryStreamReader.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\BinaryStreamRef.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\BinaryStreamWriter.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\BlockFrequency.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\BranchProbability.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\BuryPointer.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\CachePruning.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\Caching.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\Chrono.cpp">
       <Filter>lib</Filter>
     </ClCompile>
     <ClCompile Include="..\lib\Support\circular_raw_ostream.cpp">
       <Filter>lib</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\Support\CodeGenCoverage.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\COM.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\Compression.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\ConvertUTF.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\ConvertUTFWrapper.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\CRC.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\CSKYAttributeParser.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\CSKYAttributes.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\CSKYTargetParser.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\DAGDeltaAlgorithm.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\DataExtractor.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\DebugCounter.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\DeltaAlgorithm.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\DivisionByConstantInfo.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\DJB.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\DynamicLibrary.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\ELFAttributeParser.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\ELFAttributes.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\Errno.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\ExtensibleRTTI.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\FileCollector.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\FileOutputBuffer.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\FileUtilities.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
     <ClCompile Include="..\lib\Support\FoldingSet.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\FormattedStream.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\GlobPattern.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\GraphWriter.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\InitLLVM.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\InstructionCost.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\IntEqClasses.cpp">
       <Filter>lib</Filter>
     </ClCompile>
     <ClCompile Include="..\lib\Support\IntervalMap.cpp">
       <Filter>lib</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\Support\JSON.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\KnownBits.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\LEB128.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\LineIterator.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\Locale.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\LockFileManager.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\LowLevelType.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
     <ClCompile Include="..\lib\Support\MathExtras.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\MD5.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\Memory.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\MemoryBufferRef.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\MSP430AttributeParser.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\MSP430Attributes.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\OptimizedStructLayout.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\Optional.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\Parallel.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\PluginLoader.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\PrettyStackTrace.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\RandomNumberGenerator.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\raw_os_ostream.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\regcomp.c">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\regerror.c">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\Regex.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\regexec.c">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\regfree.c">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\regstrlcpy.c">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\RISCVAttributeParser.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\RISCVAttributes.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\RISCVISAInfo.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\RWMutex.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\ScaledNumber.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\ScopedPrinter.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\SHA1.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\SHA256.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\Signals.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\Signposts.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\SourceMgr.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\SpecialCaseList.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\Statistic.cpp">
       <Filter>lib</Filter>
     </ClCompile>
     <ClCompile Include="..\lib\Support\StringMap.cpp">
       <Filter>lib</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\Support\StringSaver.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\SuffixTree.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\SystemUtils.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\TargetParser.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\TarWriter.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\Threading.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\ThreadLocal.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\ThreadPool.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\TimeProfiler.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\Timer.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\ToolOutputFile.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\TrigramIndex.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\Support\Triple.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
     <ClCompile Include="..\lib\Support\Twine.cpp">
       <Filter>lib</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\Support\TypeSize.cpp">
-      <Filter>lib</Filter>
+    <ClCompile Include="..\lib\ADTAdapter.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\Support\Unicode.cpp">
-      <Filter>lib</Filter>
+    <ClCompile Include="..\unittests\ADT\AnyTest.cpp">
+      <Filter>unitest</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\Support\UnicodeCaseFold.cpp">
-      <Filter>lib</Filter>
+    <ClCompile Include="..\unittests\ADT\APIntTest.cpp">
+      <Filter>unitest</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\Support\UnicodeNameToCodepoint.cpp">
-      <Filter>lib</Filter>
+    <ClCompile Include="..\unittests\ADT\APSIntTest.cpp">
+      <Filter>unitest</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\Support\UnicodeNameToCodepointGenerated.cpp">
-      <Filter>lib</Filter>
+    <ClCompile Include="..\unittests\ADT\ArrayRefTest.cpp">
+      <Filter>unitest</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\Support\Valgrind.cpp">
-      <Filter>lib</Filter>
+    <ClCompile Include="..\unittests\ADT\BitFieldsTest.cpp">
+      <Filter>unitest</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\Support\VersionTuple.cpp">
-      <Filter>lib</Filter>
+    <ClCompile Include="..\unittests\ADT\BitmaskEnumTest.cpp">
+      <Filter>unitest</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\Support\Watchdog.cpp">
-      <Filter>lib</Filter>
+    <ClCompile Include="..\unittests\ADT\BitVectorTest.cpp">
+      <Filter>unitest</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\Support\WithColor.cpp">
-      <Filter>lib</Filter>
+    <ClCompile Include="..\unittests\ADT\BumpPtrListTest.cpp">
+      <Filter>unitest</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\Support\xxhash.cpp">
-      <Filter>lib</Filter>
+    <ClCompile Include="..\unittests\ADT\CoalescingBitVectorTest.cpp">
+      <Filter>unitest</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\Support\Z3Solver.cpp">
-      <Filter>lib</Filter>
+    <ClCompile Include="..\unittests\ADT\DenseMapTest.cpp">
+      <Filter>unitest</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\Support\CommandLine.cpp">
-      <Filter>lib</Filter>
+    <ClCompile Include="..\unittests\ADT\DenseSetTest.cpp">
+      <Filter>unitest</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\Support\Host.cpp">
-      <Filter>lib</Filter>
+    <ClCompile Include="..\unittests\ADT\EnumeratedArrayTest.cpp">
+      <Filter>unitest</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\Support\VirtualFileSystem.cpp">
-      <Filter>lib</Filter>
+    <ClCompile Include="..\unittests\ADT\FunctionExtrasTest.cpp">
+      <Filter>unitest</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\Support\YAMLParser.cpp">
-      <Filter>lib</Filter>
+    <ClCompile Include="..\unittests\ADT\FunctionRefTest.cpp">
+      <Filter>unitest</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\Support\YAMLTraits.cpp">
-      <Filter>lib</Filter>
+    <ClCompile Include="..\unittests\ADT\HashingTest.cpp">
+      <Filter>unitest</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\Support\MemoryBuffer.cpp">
-      <Filter>lib</Filter>
+    <ClCompile Include="..\unittests\ADT\ImmutableListTest.cpp">
+      <Filter>unitest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\unittests\ADT\ImmutableMapTest.cpp">
+      <Filter>unitest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\unittests\ADT\ImmutableSetTest.cpp">
+      <Filter>unitest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\unittests\ADT\IntervalMapTest.cpp">
+      <Filter>unitest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\unittests\ADT\IntrusiveRefCntPtrTest.cpp">
+      <Filter>unitest</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>unitest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\unittests\ADT\SmallPtrSetTest.cpp">
+      <Filter>unitest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\unittests\ADT\SmallSetTest.cpp">
+      <Filter>unitest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\unittests\ADT\SparseBitVectorTest.cpp">
+      <Filter>unitest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\unittests\ADT\SparseMultiSetTest.cpp">
+      <Filter>unitest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\unittests\ADT\SparseSetTest.cpp">
+      <Filter>unitest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\unittests\ADT\StringExtrasTest.cpp">
+      <Filter>unitest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\unittests\ADT\StringMapTest.cpp">
+      <Filter>unitest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\unittests\ADT\StringRefTest.cpp">
+      <Filter>unitest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\unittests\ADT\StringSetTest.cpp">
+      <Filter>unitest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\unittests\ADT\StringSwitchTest.cpp">
+      <Filter>unitest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\unittests\ADT\TwineTest.cpp">
+      <Filter>unitest</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1327,18 +1045,6 @@
     </ClInclude>
     <ClInclude Include="..\llvm\Config\abi-breaking.h">
       <Filter>llvm\Config</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\Support\DebugOptions.h">
-      <Filter>lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\Support\regex_impl.h">
-      <Filter>lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\Support\regex2.h">
-      <Filter>lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\Support\regutils.h">
-      <Filter>lib</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

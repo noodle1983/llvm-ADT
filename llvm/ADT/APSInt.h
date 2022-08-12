@@ -42,6 +42,7 @@ public:
   ///
   /// \param Str the string to be interpreted.
   explicit APSInt(StringRef Str);
+//  explicit APSInt(const char* Str);
 
   /// Determine sign of this APSInt.
   ///

@@ -11,19 +11,19 @@
 //===----------------------------------------------------------------------===//
 
 #include "llvm/Support/raw_ostream.h"
-#include "llvm/ADT/STLArrayExtras.h"
+//#include "llvm/ADT/STLArrayExtras.h"
 #include "llvm/ADT/StringExtras.h"
 #include "llvm/Config/config.h"
-#include "llvm/Support/Compiler.h"
-#include "llvm/Support/Duration.h"
+//#include "llvm/Support/Compiler.h"
+//#include "llvm/Support/Duration.h"
 #include "llvm/Support/ErrorHandling.h"
-#include "llvm/Support/FileSystem.h"
+//#include "llvm/Support/FileSystem.h"
 #include "llvm/Support/Format.h"
 #include "llvm/Support/FormatVariadic.h"
 #include "llvm/Support/MathExtras.h"
 #include "llvm/Support/NativeFormatting.h"
-#include "llvm/Support/Process.h"
-#include "llvm/Support/Program.h"
+//#include "llvm/Support/Process.h"
+//#include "llvm/Support/Program.h"
 #include <algorithm>
 #include <cerrno>
 #include <cstdio>
@@ -503,49 +503,50 @@ raw_ostream &raw_ostream::write_zeros(unsigned NumZeros) {
 }
 
 bool raw_ostream::prepare_colors() {
-  // Colors were explicitly disabled.
-  if (!ColorEnabled)
+//  // Colors were explicitly disabled.
+//  if (!ColorEnabled)
+//    return false;
+//
+//  // Colors require changing the terminal but this stream is not going to a
+//  // terminal.
+//  if (sys::Process::ColorNeedsFlush() && !is_displayed())
+//    return false;
+//
+//  if (sys::Process::ColorNeedsFlush())
+//    flush();
+//
+//  return true;
     return false;
-
-  // Colors require changing the terminal but this stream is not going to a
-  // terminal.
-  if (sys::Process::ColorNeedsFlush() && !is_displayed())
-    return false;
-
-  if (sys::Process::ColorNeedsFlush())
-    flush();
-
-  return true;
 }
-
+//
 raw_ostream &raw_ostream::changeColor(enum Colors colors, bool bold, bool bg) {
-  if (!prepare_colors())
-    return *this;
-
-  const char *colorcode =
-      (colors == SAVEDCOLOR)
-          ? sys::Process::OutputBold(bg)
-          : sys::Process::OutputColor(static_cast<char>(colors), bold, bg);
-  if (colorcode)
-    write(colorcode, strlen(colorcode));
+//  if (!prepare_colors())
+//    return *this;
+//
+//  const char *colorcode =
+//      (colors == SAVEDCOLOR)
+//          ? sys::Process::OutputBold(bg)
+//          : sys::Process::OutputColor(static_cast<char>(colors), bold, bg);
+//  if (colorcode)
+//    write(colorcode, strlen(colorcode));
   return *this;
 }
 
 raw_ostream &raw_ostream::resetColor() {
-  if (!prepare_colors())
-    return *this;
-
-  if (const char *colorcode = sys::Process::ResetColor())
-    write(colorcode, strlen(colorcode));
+//  if (!prepare_colors())
+//    return *this;
+//
+//  if (const char *colorcode = sys::Process::ResetColor())
+//    write(colorcode, strlen(colorcode));
   return *this;
 }
 
 raw_ostream &raw_ostream::reverseColor() {
-  if (!prepare_colors())
-    return *this;
-
-  if (const char *colorcode = sys::Process::OutputReverse())
-    write(colorcode, strlen(colorcode));
+//  if (!prepare_colors())
+//    return *this;
+//
+//  if (const char *colorcode = sys::Process::OutputReverse())
+//    write(colorcode, strlen(colorcode));
   return *this;
 }
 
@@ -562,339 +563,339 @@ void format_object_base::home() {
 //===----------------------------------------------------------------------===//
 //  raw_fd_ostream
 //===----------------------------------------------------------------------===//
-
-static int getFD(StringRef Filename, std::error_code &EC,
-                 sys::fs::CreationDisposition Disp, sys::fs::FileAccess Access,
-                 sys::fs::OpenFlags Flags) {
-  assert((Access & sys::fs::FA_Write) &&
-         "Cannot make a raw_ostream from a read-only descriptor!");
-
-  // Handle "-" as stdout. Note that when we do this, we consider ourself
-  // the owner of stdout and may set the "binary" flag globally based on Flags.
-  if (Filename == "-") {
-    EC = std::error_code();
-    // Change stdout's text/binary mode based on the Flags.
-    sys::ChangeStdoutMode(Flags);
-    return STDOUT_FILENO;
-  }
-
-  int FD;
-  if (Access & sys::fs::FA_Read)
-    EC = sys::fs::openFileForReadWrite(Filename, FD, Disp, Flags);
-  else
-    EC = sys::fs::openFileForWrite(Filename, FD, Disp, Flags);
-  if (EC)
-    return -1;
-
-  return FD;
-}
-
-raw_fd_ostream::raw_fd_ostream(StringRef Filename, std::error_code &EC)
-    : raw_fd_ostream(Filename, EC, sys::fs::CD_CreateAlways, sys::fs::FA_Write,
-                     sys::fs::OF_None) {}
-
-raw_fd_ostream::raw_fd_ostream(StringRef Filename, std::error_code &EC,
-                               sys::fs::CreationDisposition Disp)
-    : raw_fd_ostream(Filename, EC, Disp, sys::fs::FA_Write, sys::fs::OF_None) {}
-
-raw_fd_ostream::raw_fd_ostream(StringRef Filename, std::error_code &EC,
-                               sys::fs::FileAccess Access)
-    : raw_fd_ostream(Filename, EC, sys::fs::CD_CreateAlways, Access,
-                     sys::fs::OF_None) {}
-
-raw_fd_ostream::raw_fd_ostream(StringRef Filename, std::error_code &EC,
-                               sys::fs::OpenFlags Flags)
-    : raw_fd_ostream(Filename, EC, sys::fs::CD_CreateAlways, sys::fs::FA_Write,
-                     Flags) {}
-
-raw_fd_ostream::raw_fd_ostream(StringRef Filename, std::error_code &EC,
-                               sys::fs::CreationDisposition Disp,
-                               sys::fs::FileAccess Access,
-                               sys::fs::OpenFlags Flags)
-    : raw_fd_ostream(getFD(Filename, EC, Disp, Access, Flags), true) {}
-
-/// FD is the file descriptor that this writes to.  If ShouldClose is true, this
-/// closes the file when the stream is destroyed.
-raw_fd_ostream::raw_fd_ostream(int fd, bool shouldClose, bool unbuffered,
-                               OStreamKind K)
-    : raw_pwrite_stream(unbuffered, K), FD(fd), ShouldClose(shouldClose) {
-  if (FD < 0 ) {
-    ShouldClose = false;
-    return;
-  }
-
-  enable_colors(true);
-
-  // Do not attempt to close stdout or stderr. We used to try to maintain the
-  // property that tools that support writing file to stdout should not also
-  // write informational output to stdout, but in practice we were never able to
-  // maintain this invariant. Many features have been added to LLVM and clang
-  // (-fdump-record-layouts, optimization remarks, etc) that print to stdout, so
-  // users must simply be aware that mixed output and remarks is a possibility.
-  if (FD <= STDERR_FILENO)
-    ShouldClose = false;
-
-#ifdef _WIN32
-  // Check if this is a console device. This is not equivalent to isatty.
-  IsWindowsConsole =
-      ::GetFileType((HANDLE)::_get_osfhandle(fd)) == FILE_TYPE_CHAR;
-#endif
-
-  // Get the starting position.
-  off_t loc = ::lseek(FD, 0, SEEK_CUR);
-  sys::fs::file_status Status;
-  std::error_code EC = status(FD, Status);
-  IsRegularFile = Status.type() == sys::fs::file_type::regular_file;
-#ifdef _WIN32
-  // MSVCRT's _lseek(SEEK_CUR) doesn't return -1 for pipes.
-  SupportsSeeking = !EC && IsRegularFile;
-#else
-  SupportsSeeking = !EC && loc != (off_t)-1;
-#endif
-  if (!SupportsSeeking)
-    pos = 0;
-  else
-    pos = static_cast<uint64_t>(loc);
-}
-
-raw_fd_ostream::~raw_fd_ostream() {
-  if (FD >= 0) {
-    flush();
-    if (ShouldClose) {
-      if (auto EC = sys::Process::SafelyCloseFileDescriptor(FD))
-        error_detected(EC);
-    }
-  }
-
-#ifdef __MINGW32__
-  // On mingw, global dtors should not call exit().
-  // report_fatal_error() invokes exit(). We know report_fatal_error()
-  // might not write messages to stderr when any errors were detected
-  // on FD == 2.
-  if (FD == 2) return;
-#endif
-
-  // If there are any pending errors, report them now. Clients wishing
-  // to avoid report_fatal_error calls should check for errors with
-  // has_error() and clear the error flag with clear_error() before
-  // destructing raw_ostream objects which may have errors.
-  if (has_error())
-    report_fatal_error(Twine("IO failure on output stream: ") +
-                           error().message(),
-                       /*gen_crash_diag=*/false);
-}
-
-#if defined(_WIN32)
-// The most reliable way to print unicode in a Windows console is with
-// WriteConsoleW. To use that, first transcode from UTF-8 to UTF-16. This
-// assumes that LLVM programs always print valid UTF-8 to the console. The data
-// might not be UTF-8 for two major reasons:
-// 1. The program is printing binary (-filetype=obj -o -), in which case it
-// would have been gibberish anyway.
-// 2. The program is printing text in a semi-ascii compatible codepage like
-// shift-jis or cp1252.
 //
-// Most LLVM programs don't produce non-ascii text unless they are quoting
-// user source input. A well-behaved LLVM program should either validate that
-// the input is UTF-8 or transcode from the local codepage to UTF-8 before
-// quoting it. If they don't, this may mess up the encoding, but this is still
-// probably the best compromise we can make.
-static bool write_console_impl(int FD, StringRef Data) {
-  SmallVector<wchar_t, 256> WideText;
-
-  // Fall back to ::write if it wasn't valid UTF-8.
-  if (auto EC = sys::windows::UTF8ToUTF16(Data, WideText))
-    return false;
-
-  // On Windows 7 and earlier, WriteConsoleW has a low maximum amount of data
-  // that can be written to the console at a time.
-  size_t MaxWriteSize = WideText.size();
-  if (!RunningWindows8OrGreater())
-    MaxWriteSize = 32767;
-
-  size_t WCharsWritten = 0;
-  do {
-    size_t WCharsToWrite =
-        std::min(MaxWriteSize, WideText.size() - WCharsWritten);
-    DWORD ActuallyWritten;
-    bool Success =
-        ::WriteConsoleW((HANDLE)::_get_osfhandle(FD), &WideText[WCharsWritten],
-                        WCharsToWrite, &ActuallyWritten,
-                        /*Reserved=*/nullptr);
-
-    // The most likely reason for WriteConsoleW to fail is that FD no longer
-    // points to a console. Fall back to ::write. If this isn't the first loop
-    // iteration, something is truly wrong.
-    if (!Success)
-      return false;
-
-    WCharsWritten += ActuallyWritten;
-  } while (WCharsWritten != WideText.size());
-  return true;
-}
-#endif
-
-void raw_fd_ostream::write_impl(const char *Ptr, size_t Size) {
-  assert(FD >= 0 && "File already closed.");
-  pos += Size;
-
-#if defined(_WIN32)
-  // If this is a Windows console device, try re-encoding from UTF-8 to UTF-16
-  // and using WriteConsoleW. If that fails, fall back to plain write().
-  if (IsWindowsConsole)
-    if (write_console_impl(FD, StringRef(Ptr, Size)))
-      return;
-#endif
-
-  // The maximum write size is limited to INT32_MAX. A write
-  // greater than SSIZE_MAX is implementation-defined in POSIX,
-  // and Windows _write requires 32 bit input.
-  size_t MaxWriteSize = INT32_MAX;
-
-#if defined(__linux__)
-  // It is observed that Linux returns EINVAL for a very large write (>2G).
-  // Make it a reasonably small value.
-  MaxWriteSize = 1024 * 1024 * 1024;
-#endif
-
-  do {
-    size_t ChunkSize = std::min(Size, MaxWriteSize);
-    ssize_t ret = ::write(FD, Ptr, ChunkSize);
-
-    if (ret < 0) {
-      // If it's a recoverable error, swallow it and retry the write.
-      //
-      // Ideally we wouldn't ever see EAGAIN or EWOULDBLOCK here, since
-      // raw_ostream isn't designed to do non-blocking I/O. However, some
-      // programs, such as old versions of bjam, have mistakenly used
-      // O_NONBLOCK. For compatibility, emulate blocking semantics by
-      // spinning until the write succeeds. If you don't want spinning,
-      // don't use O_NONBLOCK file descriptors with raw_ostream.
-      if (errno == EINTR || errno == EAGAIN
-#ifdef EWOULDBLOCK
-          || errno == EWOULDBLOCK
-#endif
-          )
-        continue;
-
-      // Otherwise it's a non-recoverable error. Note it and quit.
-      error_detected(std::error_code(errno, std::generic_category()));
-      break;
-    }
-
-    // The write may have written some or all of the data. Update the
-    // size and buffer pointer to reflect the remainder that needs
-    // to be written. If there are no bytes left, we're done.
-    Ptr += ret;
-    Size -= ret;
-  } while (Size > 0);
-}
-
-void raw_fd_ostream::close() {
-  assert(ShouldClose);
-  ShouldClose = false;
-  flush();
-  if (auto EC = sys::Process::SafelyCloseFileDescriptor(FD))
-    error_detected(EC);
-  FD = -1;
-}
-
-uint64_t raw_fd_ostream::seek(uint64_t off) {
-  assert(SupportsSeeking && "Stream does not support seeking!");
-  flush();
-#ifdef _WIN32
-  pos = ::_lseeki64(FD, off, SEEK_SET);
-#elif defined(HAVE_LSEEK64)
-  pos = ::lseek64(FD, off, SEEK_SET);
-#else
-  pos = ::lseek(FD, off, SEEK_SET);
-#endif
-  if (pos == (uint64_t)-1)
-    error_detected(std::error_code(errno, std::generic_category()));
-  return pos;
-}
-
-void raw_fd_ostream::pwrite_impl(const char *Ptr, size_t Size,
-                                 uint64_t Offset) {
-  uint64_t Pos = tell();
-  seek(Offset);
-  write(Ptr, Size);
-  seek(Pos);
-}
-
-size_t raw_fd_ostream::preferred_buffer_size() const {
-#if defined(_WIN32)
-  // Disable buffering for console devices. Console output is re-encoded from
-  // UTF-8 to UTF-16 on Windows, and buffering it would require us to split the
-  // buffer on a valid UTF-8 codepoint boundary. Terminal buffering is disabled
-  // below on most other OSs, so do the same thing on Windows and avoid that
-  // complexity.
-  if (IsWindowsConsole)
-    return 0;
-  return raw_ostream::preferred_buffer_size();
-#elif !defined(__minix)
-  // Minix has no st_blksize.
-  assert(FD >= 0 && "File not yet open!");
-  struct stat statbuf;
-  if (fstat(FD, &statbuf) != 0)
-    return 0;
-
-  // If this is a terminal, don't use buffering. Line buffering
-  // would be a more traditional thing to do, but it's not worth
-  // the complexity.
-  if (S_ISCHR(statbuf.st_mode) && is_displayed())
-    return 0;
-  // Return the preferred block size.
-  return statbuf.st_blksize;
-#else
-  return raw_ostream::preferred_buffer_size();
-#endif
-}
-
-bool raw_fd_ostream::is_displayed() const {
-  return sys::Process::FileDescriptorIsDisplayed(FD);
-}
-
-bool raw_fd_ostream::has_colors() const {
-  if (!HasColors)
-    HasColors = sys::Process::FileDescriptorHasColors(FD);
-  return *HasColors;
-}
-
-Expected<sys::fs::FileLocker> raw_fd_ostream::lock() {
-  std::error_code EC = sys::fs::lockFile(FD);
-  if (!EC)
-    return sys::fs::FileLocker(FD);
-  return errorCodeToError(EC);
-}
-
-Expected<sys::fs::FileLocker>
-raw_fd_ostream::tryLockFor(Duration const& Timeout) {
-  std::error_code EC = sys::fs::tryLockFile(FD, Timeout.getDuration());
-  if (!EC)
-    return sys::fs::FileLocker(FD);
-  return errorCodeToError(EC);
-}
-
-void raw_fd_ostream::anchor() {}
-
-//===----------------------------------------------------------------------===//
-//  outs(), errs(), nulls()
-//===----------------------------------------------------------------------===//
-
-raw_fd_ostream &llvm::outs() {
-  // Set buffer settings to model stdout behavior.
-  std::error_code EC;
-  static raw_fd_ostream S("-", EC, sys::fs::OF_None);
-  assert(!EC);
-  return S;
-}
-
-raw_fd_ostream &llvm::errs() {
-  // Set standard error to be unbuffered and tied to outs() by default.
-  static raw_fd_ostream S(STDERR_FILENO, false, true);
-  return S;
-}
+//static int getFD(StringRef Filename, std::error_code &EC,
+//                 sys::fs::CreationDisposition Disp, sys::fs::FileAccess Access,
+//                 sys::fs::OpenFlags Flags) {
+//  assert((Access & sys::fs::FA_Write) &&
+//         "Cannot make a raw_ostream from a read-only descriptor!");
+//
+//  // Handle "-" as stdout. Note that when we do this, we consider ourself
+//  // the owner of stdout and may set the "binary" flag globally based on Flags.
+//  if (Filename == "-") {
+//    EC = std::error_code();
+//    // Change stdout's text/binary mode based on the Flags.
+//    sys::ChangeStdoutMode(Flags);
+//    return STDOUT_FILENO;
+//  }
+//
+//  int FD;
+//  if (Access & sys::fs::FA_Read)
+//    EC = sys::fs::openFileForReadWrite(Filename, FD, Disp, Flags);
+//  else
+//    EC = sys::fs::openFileForWrite(Filename, FD, Disp, Flags);
+//  if (EC)
+//    return -1;
+//
+//  return FD;
+//}
+//
+//raw_fd_ostream::raw_fd_ostream(StringRef Filename, std::error_code &EC)
+//    : raw_fd_ostream(Filename, EC, sys::fs::CD_CreateAlways, sys::fs::FA_Write,
+//                     sys::fs::OF_None) {}
+//
+//raw_fd_ostream::raw_fd_ostream(StringRef Filename, std::error_code &EC,
+//                               sys::fs::CreationDisposition Disp)
+//    : raw_fd_ostream(Filename, EC, Disp, sys::fs::FA_Write, sys::fs::OF_None) {}
+//
+//raw_fd_ostream::raw_fd_ostream(StringRef Filename, std::error_code &EC,
+//                               sys::fs::FileAccess Access)
+//    : raw_fd_ostream(Filename, EC, sys::fs::CD_CreateAlways, Access,
+//                     sys::fs::OF_None) {}
+//
+//raw_fd_ostream::raw_fd_ostream(StringRef Filename, std::error_code &EC,
+//                               sys::fs::OpenFlags Flags)
+//    : raw_fd_ostream(Filename, EC, sys::fs::CD_CreateAlways, sys::fs::FA_Write,
+//                     Flags) {}
+//
+//raw_fd_ostream::raw_fd_ostream(StringRef Filename, std::error_code &EC,
+//                               sys::fs::CreationDisposition Disp,
+//                               sys::fs::FileAccess Access,
+//                               sys::fs::OpenFlags Flags)
+//    : raw_fd_ostream(getFD(Filename, EC, Disp, Access, Flags), true) {}
+//
+///// FD is the file descriptor that this writes to.  If ShouldClose is true, this
+///// closes the file when the stream is destroyed.
+//raw_fd_ostream::raw_fd_ostream(int fd, bool shouldClose, bool unbuffered,
+//                               OStreamKind K)
+//    : raw_pwrite_stream(unbuffered, K), FD(fd), ShouldClose(shouldClose) {
+//  if (FD < 0 ) {
+//    ShouldClose = false;
+//    return;
+//  }
+//
+//  enable_colors(true);
+//
+//  // Do not attempt to close stdout or stderr. We used to try to maintain the
+//  // property that tools that support writing file to stdout should not also
+//  // write informational output to stdout, but in practice we were never able to
+//  // maintain this invariant. Many features have been added to LLVM and clang
+//  // (-fdump-record-layouts, optimization remarks, etc) that print to stdout, so
+//  // users must simply be aware that mixed output and remarks is a possibility.
+//  if (FD <= STDERR_FILENO)
+//    ShouldClose = false;
+//
+//#ifdef _WIN32
+//  // Check if this is a console device. This is not equivalent to isatty.
+//  IsWindowsConsole =
+//      ::GetFileType((HANDLE)::_get_osfhandle(fd)) == FILE_TYPE_CHAR;
+//#endif
+//
+//  // Get the starting position.
+//  off_t loc = ::lseek(FD, 0, SEEK_CUR);
+//  sys::fs::file_status Status;
+//  std::error_code EC = status(FD, Status);
+//  IsRegularFile = Status.type() == sys::fs::file_type::regular_file;
+//#ifdef _WIN32
+//  // MSVCRT's _lseek(SEEK_CUR) doesn't return -1 for pipes.
+//  SupportsSeeking = !EC && IsRegularFile;
+//#else
+//  SupportsSeeking = !EC && loc != (off_t)-1;
+//#endif
+//  if (!SupportsSeeking)
+//    pos = 0;
+//  else
+//    pos = static_cast<uint64_t>(loc);
+//}
+//
+//raw_fd_ostream::~raw_fd_ostream() {
+//  if (FD >= 0) {
+//    flush();
+//    if (ShouldClose) {
+//      if (auto EC = sys::Process::SafelyCloseFileDescriptor(FD))
+//        error_detected(EC);
+//    }
+//  }
+//
+//#ifdef __MINGW32__
+//  // On mingw, global dtors should not call exit().
+//  // report_fatal_error() invokes exit(). We know report_fatal_error()
+//  // might not write messages to stderr when any errors were detected
+//  // on FD == 2.
+//  if (FD == 2) return;
+//#endif
+//
+//  // If there are any pending errors, report them now. Clients wishing
+//  // to avoid report_fatal_error calls should check for errors with
+//  // has_error() and clear the error flag with clear_error() before
+//  // destructing raw_ostream objects which may have errors.
+//  if (has_error())
+//    report_fatal_error(Twine("IO failure on output stream: ") +
+//                           error().message(),
+//                       /*gen_crash_diag=*/false);
+//}
+//
+//#if defined(_WIN32)
+//// The most reliable way to print unicode in a Windows console is with
+//// WriteConsoleW. To use that, first transcode from UTF-8 to UTF-16. This
+//// assumes that LLVM programs always print valid UTF-8 to the console. The data
+//// might not be UTF-8 for two major reasons:
+//// 1. The program is printing binary (-filetype=obj -o -), in which case it
+//// would have been gibberish anyway.
+//// 2. The program is printing text in a semi-ascii compatible codepage like
+//// shift-jis or cp1252.
+////
+//// Most LLVM programs don't produce non-ascii text unless they are quoting
+//// user source input. A well-behaved LLVM program should either validate that
+//// the input is UTF-8 or transcode from the local codepage to UTF-8 before
+//// quoting it. If they don't, this may mess up the encoding, but this is still
+//// probably the best compromise we can make.
+//static bool write_console_impl(int FD, StringRef Data) {
+//  SmallVector<wchar_t, 256> WideText;
+//
+//  // Fall back to ::write if it wasn't valid UTF-8.
+//  if (auto EC = sys::windows::UTF8ToUTF16(Data, WideText))
+//    return false;
+//
+//  // On Windows 7 and earlier, WriteConsoleW has a low maximum amount of data
+//  // that can be written to the console at a time.
+//  size_t MaxWriteSize = WideText.size();
+//  if (!RunningWindows8OrGreater())
+//    MaxWriteSize = 32767;
+//
+//  size_t WCharsWritten = 0;
+//  do {
+//    size_t WCharsToWrite =
+//        std::min(MaxWriteSize, WideText.size() - WCharsWritten);
+//    DWORD ActuallyWritten;
+//    bool Success =
+//        ::WriteConsoleW((HANDLE)::_get_osfhandle(FD), &WideText[WCharsWritten],
+//                        WCharsToWrite, &ActuallyWritten,
+//                        /*Reserved=*/nullptr);
+//
+//    // The most likely reason for WriteConsoleW to fail is that FD no longer
+//    // points to a console. Fall back to ::write. If this isn't the first loop
+//    // iteration, something is truly wrong.
+//    if (!Success)
+//      return false;
+//
+//    WCharsWritten += ActuallyWritten;
+//  } while (WCharsWritten != WideText.size());
+//  return true;
+//}
+//#endif
+//
+//void raw_fd_ostream::write_impl(const char *Ptr, size_t Size) {
+//  assert(FD >= 0 && "File already closed.");
+//  pos += Size;
+//
+//#if defined(_WIN32)
+//  // If this is a Windows console device, try re-encoding from UTF-8 to UTF-16
+//  // and using WriteConsoleW. If that fails, fall back to plain write().
+//  if (IsWindowsConsole)
+//    if (write_console_impl(FD, StringRef(Ptr, Size)))
+//      return;
+//#endif
+//
+//  // The maximum write size is limited to INT32_MAX. A write
+//  // greater than SSIZE_MAX is implementation-defined in POSIX,
+//  // and Windows _write requires 32 bit input.
+//  size_t MaxWriteSize = INT32_MAX;
+//
+//#if defined(__linux__)
+//  // It is observed that Linux returns EINVAL for a very large write (>2G).
+//  // Make it a reasonably small value.
+//  MaxWriteSize = 1024 * 1024 * 1024;
+//#endif
+//
+//  do {
+//    size_t ChunkSize = std::min(Size, MaxWriteSize);
+//    ssize_t ret = ::write(FD, Ptr, ChunkSize);
+//
+//    if (ret < 0) {
+//      // If it's a recoverable error, swallow it and retry the write.
+//      //
+//      // Ideally we wouldn't ever see EAGAIN or EWOULDBLOCK here, since
+//      // raw_ostream isn't designed to do non-blocking I/O. However, some
+//      // programs, such as old versions of bjam, have mistakenly used
+//      // O_NONBLOCK. For compatibility, emulate blocking semantics by
+//      // spinning until the write succeeds. If you don't want spinning,
+//      // don't use O_NONBLOCK file descriptors with raw_ostream.
+//      if (errno == EINTR || errno == EAGAIN
+//#ifdef EWOULDBLOCK
+//          || errno == EWOULDBLOCK
+//#endif
+//          )
+//        continue;
+//
+//      // Otherwise it's a non-recoverable error. Note it and quit.
+//      error_detected(std::error_code(errno, std::generic_category()));
+//      break;
+//    }
+//
+//    // The write may have written some or all of the data. Update the
+//    // size and buffer pointer to reflect the remainder that needs
+//    // to be written. If there are no bytes left, we're done.
+//    Ptr += ret;
+//    Size -= ret;
+//  } while (Size > 0);
+//}
+//
+//void raw_fd_ostream::close() {
+//  assert(ShouldClose);
+//  ShouldClose = false;
+//  flush();
+//  if (auto EC = sys::Process::SafelyCloseFileDescriptor(FD))
+//    error_detected(EC);
+//  FD = -1;
+//}
+//
+//uint64_t raw_fd_ostream::seek(uint64_t off) {
+//  assert(SupportsSeeking && "Stream does not support seeking!");
+//  flush();
+//#ifdef _WIN32
+//  pos = ::_lseeki64(FD, off, SEEK_SET);
+//#elif defined(HAVE_LSEEK64)
+//  pos = ::lseek64(FD, off, SEEK_SET);
+//#else
+//  pos = ::lseek(FD, off, SEEK_SET);
+//#endif
+//  if (pos == (uint64_t)-1)
+//    error_detected(std::error_code(errno, std::generic_category()));
+//  return pos;
+//}
+//
+//void raw_fd_ostream::pwrite_impl(const char *Ptr, size_t Size,
+//                                 uint64_t Offset) {
+//  uint64_t Pos = tell();
+//  seek(Offset);
+//  write(Ptr, Size);
+//  seek(Pos);
+//}
+//
+//size_t raw_fd_ostream::preferred_buffer_size() const {
+//#if defined(_WIN32)
+//  // Disable buffering for console devices. Console output is re-encoded from
+//  // UTF-8 to UTF-16 on Windows, and buffering it would require us to split the
+//  // buffer on a valid UTF-8 codepoint boundary. Terminal buffering is disabled
+//  // below on most other OSs, so do the same thing on Windows and avoid that
+//  // complexity.
+//  if (IsWindowsConsole)
+//    return 0;
+//  return raw_ostream::preferred_buffer_size();
+//#elif !defined(__minix)
+//  // Minix has no st_blksize.
+//  assert(FD >= 0 && "File not yet open!");
+//  struct stat statbuf;
+//  if (fstat(FD, &statbuf) != 0)
+//    return 0;
+//
+//  // If this is a terminal, don't use buffering. Line buffering
+//  // would be a more traditional thing to do, but it's not worth
+//  // the complexity.
+//  if (S_ISCHR(statbuf.st_mode) && is_displayed())
+//    return 0;
+//  // Return the preferred block size.
+//  return statbuf.st_blksize;
+//#else
+//  return raw_ostream::preferred_buffer_size();
+//#endif
+//}
+//
+//bool raw_fd_ostream::is_displayed() const {
+//  return sys::Process::FileDescriptorIsDisplayed(FD);
+//}
+//
+//bool raw_fd_ostream::has_colors() const {
+//  if (!HasColors)
+//    HasColors = sys::Process::FileDescriptorHasColors(FD);
+//  return *HasColors;
+//}
+//
+//Expected<sys::fs::FileLocker> raw_fd_ostream::lock() {
+//  std::error_code EC = sys::fs::lockFile(FD);
+//  if (!EC)
+//    return sys::fs::FileLocker(FD);
+//  return errorCodeToError(EC);
+//}
+//
+//Expected<sys::fs::FileLocker>
+//raw_fd_ostream::tryLockFor(Duration const& Timeout) {
+//  std::error_code EC = sys::fs::tryLockFile(FD, Timeout.getDuration());
+//  if (!EC)
+//    return sys::fs::FileLocker(FD);
+//  return errorCodeToError(EC);
+//}
+//
+//void raw_fd_ostream::anchor() {}
+//
+////===----------------------------------------------------------------------===//
+////  outs(), errs(), nulls()
+////===----------------------------------------------------------------------===//
+//
+//raw_fd_ostream &llvm::outs() {
+//  // Set buffer settings to model stdout behavior.
+//  std::error_code EC;
+//  static raw_fd_ostream S("-", EC, sys::fs::OF_None);
+//  assert(!EC);
+//  return S;
+//}
+//
+//raw_fd_ostream &llvm::errs() {
+//  // Set standard error to be unbuffered and tied to outs() by default.
+//  static raw_fd_ostream S(STDERR_FILENO, false, true);
+//  return S;
+//}
 
 /// nulls() - This returns a reference to a raw_ostream which discards output.
 raw_ostream &llvm::nulls() {
@@ -902,36 +903,36 @@ raw_ostream &llvm::nulls() {
   return S;
 }
 
-//===----------------------------------------------------------------------===//
-// File Streams
-//===----------------------------------------------------------------------===//
-
-raw_fd_stream::raw_fd_stream(StringRef Filename, std::error_code &EC)
-    : raw_fd_ostream(getFD(Filename, EC, sys::fs::CD_CreateAlways,
-                           sys::fs::FA_Write | sys::fs::FA_Read,
-                           sys::fs::OF_None),
-                     true, false, OStreamKind::OK_FDStream) {
-  if (EC)
-    return;
-
-  if (!isRegularFile())
-    EC = std::make_error_code(std::errc::invalid_argument);
-}
-
-ssize_t raw_fd_stream::read(char *Ptr, size_t Size) {
-  assert(get_fd() >= 0 && "File already closed.");
-  ssize_t Ret = ::read(get_fd(), (void *)Ptr, Size);
-  if (Ret >= 0)
-    inc_pos(Ret);
-  else
-    error_detected(std::error_code(errno, std::generic_category()));
-  return Ret;
-}
-
-bool raw_fd_stream::classof(const raw_ostream *OS) {
-  return OS->get_kind() == OStreamKind::OK_FDStream;
-}
-
+////===----------------------------------------------------------------------===//
+//// File Streams
+////===----------------------------------------------------------------------===//
+//
+//raw_fd_stream::raw_fd_stream(StringRef Filename, std::error_code &EC)
+//    : raw_fd_ostream(getFD(Filename, EC, sys::fs::CD_CreateAlways,
+//                           sys::fs::FA_Write | sys::fs::FA_Read,
+//                           sys::fs::OF_None),
+//                     true, false, OStreamKind::OK_FDStream) {
+//  if (EC)
+//    return;
+//
+//  if (!isRegularFile())
+//    EC = std::make_error_code(std::errc::invalid_argument);
+//}
+//
+//ssize_t raw_fd_stream::read(char *Ptr, size_t Size) {
+//  assert(get_fd() >= 0 && "File already closed.");
+//  ssize_t Ret = ::read(get_fd(), (void *)Ptr, Size);
+//  if (Ret >= 0)
+//    inc_pos(Ret);
+//  else
+//    error_detected(std::error_code(errno, std::generic_category()));
+//  return Ret;
+//}
+//
+//bool raw_fd_stream::classof(const raw_ostream *OS) {
+//  return OS->get_kind() == OStreamKind::OK_FDStream;
+//}
+//
 //===----------------------------------------------------------------------===//
 //  raw_string_ostream
 //===----------------------------------------------------------------------===//
@@ -984,30 +985,30 @@ void buffer_ostream::anchor() {}
 
 void buffer_unique_ostream::anchor() {}
 
-Error llvm::writeToOutput(StringRef OutputFileName,
-                          std::function<Error(raw_ostream &)> Write) {
-  if (OutputFileName == "-")
-    return Write(outs());
-
-  if (OutputFileName == "/dev/null") {
-    raw_null_ostream Out;
-    return Write(Out);
-  }
-
-  unsigned Mode = sys::fs::all_read | sys::fs::all_write | sys::fs::all_exe;
-  Expected<sys::fs::TempFile> Temp =
-      sys::fs::TempFile::create(OutputFileName + ".temp-stream-%%%%%%", Mode);
-  if (!Temp)
-    return createFileError(OutputFileName, Temp.takeError());
-
-  raw_fd_ostream Out(Temp->FD, false);
-
-  if (Error E = Write(Out)) {
-    if (Error DiscardError = Temp->discard())
-      return joinErrors(std::move(E), std::move(DiscardError));
-    return E;
-  }
-  Out.flush();
-
-  return Temp->keep(OutputFileName);
-}
+//Error llvm::writeToOutput(StringRef OutputFileName,
+//                          std::function<Error(raw_ostream &)> Write) {
+//  if (OutputFileName == "-")
+//    return Write(outs());
+//
+//  if (OutputFileName == "/dev/null") {
+//    raw_null_ostream Out;
+//    return Write(Out);
+//  }
+//
+//  unsigned Mode = sys::fs::all_read | sys::fs::all_write | sys::fs::all_exe;
+//  Expected<sys::fs::TempFile> Temp =
+//      sys::fs::TempFile::create(OutputFileName + ".temp-stream-%%%%%%", Mode);
+//  if (!Temp)
+//    return createFileError(OutputFileName, Temp.takeError());
+//
+//  raw_fd_ostream Out(Temp->FD, false);
+//
+//  if (Error E = Write(Out)) {
+//    if (Error DiscardError = Temp->discard())
+//      return joinErrors(std::move(E), std::move(DiscardError));
+//    return E;
+//  }
+//  Out.flush();
+//
+//  return Temp->keep(OutputFileName);
+//}
