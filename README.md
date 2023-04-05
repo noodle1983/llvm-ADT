@@ -25,3 +25,6 @@ build_win/llvm_advanced_data_type.sln
 
 # doc
 official doc: [llvm advance data type](https://llvm.org/doxygen/dir_32453792af2ba70c54e3ccae3a790d1b.html).
+
+# license
+[original llvm license](https://github.com/llvm-mirror/llvm/blob/master/LICENSE.TXT)
